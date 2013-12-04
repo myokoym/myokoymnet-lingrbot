@@ -1,0 +1,15 @@
+{"status":"ok",
+ "counter":208,
+ "events":[
+  {"event_id":208,
+   "message":
+    {"id":82,
+     "room":"myokoymnet",
+     "public_session_id":"UBDH84",
+     "icon_url":"https://s.gravatar.com/avatar/394f372e936f867e4e43bfd1315a0a4e.png",
+     "type":"user",
+     "speaker_id":"myokoym",
+     "nickname":"Masafumi Yokoyama",
+     "text":"%25mecab hoge",
+     "timestamp":"2013-12-04T08:13:51Z",
+     "local_id":"pending-UBDH84-1"}}]}
