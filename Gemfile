@@ -2,6 +2,7 @@ source "https://rubygems.org/"
 
 gem "sinatra"
 gem "mecab-mora"
+gem "shogi_koma"
 
 group :development, :test do
   gem "test-unit"

@@ -23,6 +23,13 @@ class LingrbotTest < Test::Unit::TestCase
     assert_equal("0", last_response.body)
   end  
 
+  def test_shogikoma
+    post "/", File.read(File.join(fixtures_dir, "test_shogikoma.json"))
+    assert_true(last_response.ok?)
+    assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
+                 last_response.body)
+  end
+
   private
   def base_dir
     File.expand_path(File.join(File.dirname(__FILE__), ".."))
