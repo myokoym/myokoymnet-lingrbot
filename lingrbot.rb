@@ -20,7 +20,6 @@ post "/" do
   when /mora/
     "#{MeCab::Mora.new(command_params).count}"
   when /shogikoma/
-    return "shogikoma: it supports one or two characters." if command_params.length > 2
     image_uri = File.join("shogikoma", "#{Time.now.strftime("%Y%m%d%H%M%S")}.png")
     output_path = File.join(File.dirname(__FILE__), "public", image_uri)
     painter = ShogiKoma::Painter.new
