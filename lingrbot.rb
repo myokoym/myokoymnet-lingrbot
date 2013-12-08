@@ -16,10 +16,24 @@ post "/" do
 
   case command
   when /mecab/
-    "#{MeCab::Tagger.new.parse(command_params).gsub(/EOS\n\z/, "")}"
+    mecab(command_params)
   when /mora/
-    "#{MeCab::Mora.new(command_params).count}"
+    mora(command_params)
   when /shogikoma/
+    shogikoma(command_params)
+  end
+end
+
+helpers do
+  def mecab(command_params)
+    "#{MeCab::Tagger.new.parse(command_params).gsub(/EOS\n\z/, "")}"
+  end
+
+  def mora(command_params)
+    "#{MeCab::Mora.new(command_params).count}"
+  end
+
+  def shogikoma(command_params)
     image_uri = File.join("shogikoma", "#{Time.now.strftime("%Y%m%d%H%M%S")}.png")
     output_path = File.join(File.dirname(__FILE__), "public", image_uri)
     painter = ShogiKoma::Painter.new
