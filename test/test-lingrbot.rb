@@ -34,6 +34,13 @@ class LingrbotTest < Test::Unit::TestCase
                  last_response.body)
   end
 
+  def test_shogikoma_with_font
+    post "/", @request.gsub("XXX", "%25shogikoma --font KouzanBrushFontOTF R")
+    assert_true(last_response.ok?)
+    assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
+                 last_response.body)
+  end
+
   private
   def base_dir
     File.expand_path(File.join(File.dirname(__FILE__), ".."))
