@@ -15,13 +15,13 @@ class LingrbotTest < Test::Unit::TestCase
     post "/", File.read(File.join(fixtures_dir, "test_mecab.json"))
     assert_true(last_response.ok?)
     assert_match(/\Ahoge\t.*(,.*){5}\n\z/, last_response.body)
-  end  
+  end
 
   def test_mora
     post "/", File.read(File.join(fixtures_dir, "test_mora.json"))
     assert_true(last_response.ok?)
     assert_equal("0", last_response.body)
-  end  
+  end
 
   def test_shogikoma
     post "/", File.read(File.join(fixtures_dir, "test_shogikoma.json"))
