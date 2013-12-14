@@ -36,11 +36,24 @@ helpers do
   def shogikoma(command_params)
     image_uri = File.join("shogikoma", "#{Time.now.strftime("%Y%m%d%H%M%S")}.png")
     output_path = File.join(File.dirname(__FILE__), "public", image_uri)
+    data, options = option_parse(command_params)
     painter = ShogiKoma::Painter.new
     painter.width = 200
     painter.height = 200
-    painter.font = "IPAMincho"
-    painter.write_to_png(command_params, output_path)
+    painter.font = options[:font] || "IPAMincho"
+    painter.write_to_png(data, output_path)
     "http://myokoym.net/lingrbot/#{image_uri}"
+  end
+
+  def option_parse(command_params)
+    params = command_params.split(/\s/)
+    options = {}
+    require "optparse"
+    parser = OptionParser.new
+    parser.on("-f", "--font FONT") do |font|
+      options[:font] = font
+    end
+    parser.parse!(params)
+    [params.join(" "), options]
   end
 end
