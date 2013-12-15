@@ -57,8 +57,8 @@ helpers do
       options[:height] = max_height
     end
     painter = ShogiKoma::Painter.new
-    painter.width = options[:width] || 80
-    painter.height = options[:height] || options[:width] || 80
+    painter.width = options[:width] || 200
+    painter.height = options[:height] || options[:width] || 200
     painter.font = options[:font] || "IPAMincho"
     painter.set_text_color(options[:text_color]) if options[:text_color]
     painter.set_body_color(options[:body_color]) if options[:body_color]
