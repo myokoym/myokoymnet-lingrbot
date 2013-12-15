@@ -47,6 +47,15 @@ helpers do
     image_uri = File.join("shogikoma", "#{Time.now.strftime("%Y%m%d%H%M%S")}.png")
     output_path = File.join(File.dirname(__FILE__), "public", image_uri)
     data, options = option_parse(command_params)
+    # TODO: refactoring
+    max_width  = 400
+    max_height = 400
+    if options[:width] && options[:width] > max_width
+      options[:width] = max_width
+    end
+    if options[:height] && options[:height] > max_height
+      options[:height] = max_height
+    end
     painter = ShogiKoma::Painter.new
     painter.width = options[:width] || 80
     painter.height = options[:height] || options[:width] || 80
