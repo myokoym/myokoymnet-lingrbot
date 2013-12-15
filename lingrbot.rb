@@ -52,6 +52,8 @@ helpers do
     painter.height = 200
     painter.font = options[:font] || "IPAMincho"
     painter.set_text_color(options[:text_color]) if options[:text_color]
+    painter.set_body_color(options[:body_color]) if options[:body_color]
+    painter.set_frame_color(options[:frame_color]) if options[:frame_color]
     painter.write_to_png(data, output_path)
     "http://myokoym.net/lingrbot/#{image_uri}"
   end
@@ -66,6 +68,12 @@ helpers do
     end
     parser.on("--text-color COLOR") do |color|
       options[:text_color] = color
+    end
+    parser.on("--body-color COLOR") do |color|
+      options[:body_color] = color
+    end
+    parser.on("--frame-color COLOR") do |color|
+      options[:frame_color] = color
     end
     parser.parse!(params)
     [params.join(" "), options]
