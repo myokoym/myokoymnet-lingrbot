@@ -13,7 +13,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rr (1.1.2)
-    shogi_koma (0.0.2)
+    shogi_koma (0.0.3)
       cairo
     sinatra (1.4.4)
       rack (~> 1.4)
