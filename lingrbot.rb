@@ -48,8 +48,8 @@ helpers do
     output_path = File.join(File.dirname(__FILE__), "public", image_uri)
     data, options = option_parse(command_params)
     painter = ShogiKoma::Painter.new
-    painter.width = 200
-    painter.height = 200
+    painter.width = options[:width] || 200
+    painter.height = options[:height] || options[:width] || 200
     painter.font = options[:font] || "IPAMincho"
     painter.set_text_color(options[:text_color]) if options[:text_color]
     painter.set_body_color(options[:body_color]) if options[:body_color]
@@ -65,6 +65,12 @@ helpers do
     parser = OptionParser.new
     parser.on("-f", "--font FONT") do |font|
       options[:font] = font
+    end
+    parser.on("--width LENGTH", Integer) do |length|
+      options[:width] = length
+    end
+    parser.on("--height LENGTH", Integer) do |length|
+      options[:height] = length
     end
     parser.on("--text-color COLOR") do |color|
       options[:text_color] = color

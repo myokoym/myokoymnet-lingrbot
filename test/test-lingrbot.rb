@@ -47,6 +47,13 @@ class LingrbotTest < Test::Unit::TestCase
                  last_response.body)
   end
 
+  def test_shogikoma_with_width_and_height
+    post "/", @request.gsub("XXX", "%25shogikoma --width 100 --height 100 FU")
+    assert_true(last_response.ok?)
+    assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
+                 last_response.body)
+  end
+
   def test_shogikoma_with_text_color
     post "/", @request.gsub("XXX", "%25shogikoma --text-color red To")
     assert_true(last_response.ok?)
