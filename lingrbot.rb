@@ -41,6 +41,7 @@ helpers do
     painter.width = 200
     painter.height = 200
     painter.font = options[:font] || "IPAMincho"
+    painter.set_text_color(options[:text_color]) if options[:text_color]
     painter.write_to_png(data, output_path)
     "http://myokoym.net/lingrbot/#{image_uri}"
   end
@@ -52,6 +53,9 @@ helpers do
     parser = OptionParser.new
     parser.on("-f", "--font FONT") do |font|
       options[:font] = font
+    end
+    parser.on("--text-color COLOR") do |color|
+      options[:text_color] = color
     end
     parser.parse!(params)
     [params.join(" "), options]
