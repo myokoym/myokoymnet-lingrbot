@@ -27,6 +27,12 @@ class LingrbotTest < Test::Unit::TestCase
     assert_equal("0", last_response.body)
   end
 
+  def test_fc_list
+    post "/", @request.gsub("XXX", "%25fc_list")
+    assert_true(last_response.ok?)
+    assert_match(/Mincho|OTF/, last_response.body)
+  end
+
   def test_shogikoma
     post "/", @request.gsub("XXX", "%25shogikoma R")
     assert_true(last_response.ok?)

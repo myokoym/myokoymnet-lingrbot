@@ -9,7 +9,7 @@ post "/" do
   message = event["message"]
   text = message["text"]
 
-  /^% ?(\w+) (.*)/ =~ text
+  /^% ?(\w+) ?(.*)/ =~ text
   command = $1
   command_params = $2
   return unless command
@@ -19,6 +19,8 @@ post "/" do
     mecab(command_params)
   when /mora/
     mora(command_params)
+  when /fc_list/
+    fc_list
   when /shogikoma/
     shogikoma(command_params)
   end
@@ -31,6 +33,14 @@ helpers do
 
   def mora(command_params)
     "#{MeCab::Mora.new(command_params).count}"
+  end
+
+  def fc_list
+    `fc-list`.force_encoding("utf-8").split(/\n/).collect {|f|
+       f.split(/:/)[0].split(/,/)[0]
+    }.reject {|f|
+      /[ -]/ =~ f
+    }.uniq.join(", ")
   end
 
   def shogikoma(command_params)
