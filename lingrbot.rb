@@ -48,8 +48,8 @@ helpers do
     output_path = File.join(File.dirname(__FILE__), "public", image_uri)
     data, options = option_parse(command_params)
     painter = ShogiKoma::Painter.new
-    painter.width = options[:width] || 200
-    painter.height = options[:height] || options[:width] || 200
+    painter.width = options[:width] || 80
+    painter.height = options[:height] || options[:width] || 80
     painter.font = options[:font] || "IPAMincho"
     painter.set_text_color(options[:text_color]) if options[:text_color]
     painter.set_body_color(options[:body_color]) if options[:body_color]
