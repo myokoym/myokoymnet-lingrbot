@@ -33,6 +33,7 @@ class LingrbotTest < Test::Unit::TestCase
     assert_match(/Mincho|OTF/, last_response.body)
   end
 
+  class ShogikomaTest < self
   def test_shogikoma
     post "/", @request.gsub("XXX", "%25shogikoma R")
     assert_true(last_response.ok?)
@@ -80,6 +81,7 @@ class LingrbotTest < Test::Unit::TestCase
     assert_true(last_response.ok?)
     assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                  last_response.body)
+  end
   end
 
   private
