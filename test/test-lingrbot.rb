@@ -9,6 +9,7 @@ class LingrbotTest < Test::Unit::TestCase
 
   def setup
     @request = File.read(File.join(fixtures_dir, "test-request.json"))
+    header "Content-Type", "application/json"
   end
 
   def test_parse
@@ -18,68 +19,68 @@ class LingrbotTest < Test::Unit::TestCase
   end
 
   def test_mecab
-    post "/", @request.gsub("XXX", "%25mecab hoge")
+    post "/", @request.gsub("XXX", "%mecab hoge")
     assert_true(last_response.ok?)
     assert_match(/\Ahoge\t.*(,.*){5}\n\z/, last_response.body)
   end
 
   def test_mora
-    post "/", @request.gsub("XXX", "%25mora foo")
+    post "/", @request.gsub("XXX", "%mora foo")
     assert_true(last_response.ok?)
     assert_equal("0", last_response.body)
   end
 
   def test_fc_list
-    post "/", @request.gsub("XXX", "%25fc_list")
+    post "/", @request.gsub("XXX", "%fc_list")
     assert_true(last_response.ok?)
     assert_match(/Mincho|OTF/, last_response.body)
   end
 
   class ShogikomaTest < self
     def test_plain
-      post "/", @request.gsub("XXX", "%25shogikoma R")
+      post "/", @request.gsub("XXX", "%shogikoma R")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
     end
 
     def test_font
-      post "/", @request.gsub("XXX", "%25shogikoma --font KouzanBrushFontOTF R")
+      post "/", @request.gsub("XXX", "%shogikoma --font KouzanBrushFontOTF R")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
     end
 
     def test_width_and_height
-      post "/", @request.gsub("XXX", "%25shogikoma --width 100 --height 100 FU")
+      post "/", @request.gsub("XXX", "%shogikoma --width 100 --height 100 FU")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
     end
 
     def test_max_width_and_max_height
-      post "/", @request.gsub("XXX", "%25shogikoma --width 500 --height 500 FU")
+      post "/", @request.gsub("XXX", "%shogikoma --width 500 --height 500 FU")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
     end
 
     def test_text_color
-      post "/", @request.gsub("XXX", "%25shogikoma --text-color red To")
+      post "/", @request.gsub("XXX", "%shogikoma --text-color red To")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
     end
 
     def test_body_color
-      post "/", @request.gsub("XXX", "%25shogikoma --body-color gray FU")
+      post "/", @request.gsub("XXX", "%shogikoma --body-color gray FU")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
     end
 
     def test_frame_color
-      post "/", @request.gsub("XXX", "%25shogikoma --frame-color #00CCFF FU")
+      post "/", @request.gsub("XXX", "%shogikoma --frame-color #00CCFF FU")
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)

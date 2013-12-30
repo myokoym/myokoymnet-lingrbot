@@ -16,13 +16,13 @@ post "/" do
   return unless command
 
   case command
-  when /mecab/
+  when /\Amecab\z/
     mecab(command_params)
-  when /mora/
+  when /\Amora\z/
     mora(command_params)
-  when /fc_list/
+  when /\Afc_list\z/
     fc_list
-  when /shogikoma/
+  when /\Ashogikoma\z/
     shogikoma(command_params)
   end
 end
