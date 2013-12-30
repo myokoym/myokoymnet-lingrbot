@@ -45,10 +45,10 @@ helpers do
   end
 
   def fc_list
-    `fc-list`.force_encoding("utf-8").split(/\n/).collect {|f|
-       f.split(/:/)[0].split(/,/)[0]
-    }.reject {|f|
-      /[ -]/ =~ f
+    `fc-list`.force_encoding("utf-8").split(/\n/).collect {|font_info|
+       font_info.split(/:/)[0].split(/,/)[0]
+    }.reject {|font_name|
+      /[ -]/ =~ font_name
     }.uniq.join(", ")
   end
 
