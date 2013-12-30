@@ -10,7 +10,7 @@ post "/" do
   message = event["message"]
   text = message["text"]
 
-  /^% ?(\w+) ?(.*)/ =~ text
+  /^% ?(\w+)(?: (.*))?/ =~ text
   command = $1
   command_params = $2
   return unless command
