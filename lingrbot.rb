@@ -29,8 +29,8 @@ end
 
 get "/shogikoma.json" do
   output = "#{File.dirname(__FILE__)}/public/shogikoma/*.png"
-  images = Dir[output].sort_by do |i|
-    File.ctime i
+  images = Dir[output].sort_by do |image|
+    File.ctime image
   end
   json images.collect {|image| File.basename(image) }
 end
