@@ -32,7 +32,7 @@ get "/shogikoma.json" do
   images = Dir[output].sort_by do |i|
     File.ctime i
   end
-  json images
+  json images.collect {|image| File.basename(image) }
 end
 
 helpers do

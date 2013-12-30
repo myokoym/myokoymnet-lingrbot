@@ -88,7 +88,9 @@ class LingrbotTest < Test::Unit::TestCase
     def test_json
       get "/shogikoma.json"
       assert_true(last_response.ok?)
-      assert_kind_of(Array, JSON.parse(last_response.body))
+      images = JSON.parse(last_response.body)
+      assert_kind_of(Array, images)
+      assert_match(/\A\d+\.png\z/, images.first)
     end
   end
 
