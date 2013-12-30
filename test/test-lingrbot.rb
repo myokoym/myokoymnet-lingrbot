@@ -1,3 +1,5 @@
+require "json"
+
 class LingrbotTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
@@ -81,6 +83,12 @@ class LingrbotTest < Test::Unit::TestCase
       assert_true(last_response.ok?)
       assert_match(%r(\Ahttp://myokoym.net/lingrbot/shogikoma/\w+\.png\z),
                    last_response.body)
+    end
+
+    def test_json
+      get "/shogikoma.json"
+      assert_true(last_response.ok?)
+      assert_kind_of(Array, JSON.parse(last_response.body))
     end
   end
 
