@@ -28,7 +28,7 @@ post "/" do
 end
 
 get "/shogikoma.json" do
-  output = "#{File.dirname(__FILE__)}/public/*.png"
+  output = "#{File.dirname(__FILE__)}/public/shogikoma/*.png"
   images = Dir[output].sort_by do |i|
     File.ctime i
   end
