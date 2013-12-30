@@ -1,5 +1,6 @@
 require "sinatra"
 require "json"
+require "sinatra/json"
 require "mecab-mora"
 require "shogi_koma"
 
@@ -24,6 +25,14 @@ post "/" do
   when /shogikoma/
     shogikoma(command_params)
   end
+end
+
+get "/shogikoma.json" do
+  output = "#{File.dirname(__FILE__)}/public/*.png"
+  images = Dir[output].sort_by do |i|
+    File.ctime i
+  end
+  json images
 end
 
 helpers do
