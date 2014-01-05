@@ -37,7 +37,9 @@ end
 
 delete "/shogikoma/:name" do |name|
   image = "#{File.dirname(__FILE__)}/public/shogikoma/#{name}.png"
-  if File.exist?(image)
+  if /\A\d+\z/ =~ name
+    400 # Bad request
+  elsif File.exist?(image)
     File.delete(image)
     200 # HTTP Header
   else
