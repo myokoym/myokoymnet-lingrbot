@@ -35,6 +35,16 @@ get "/shogikoma.json" do
   json images.collect {|image| File.basename(image) }
 end
 
+delete "/shogikoma/:name" do |name|
+  image = "#{File.dirname(__FILE__)}/public/shogikoma/#{name}.png"
+  if File.exist? image
+    File.delete image
+    200 # HTTP Header
+  else
+    400 # Bad request
+  end
+end
+
 helpers do
   def mecab(command_params)
     "#{MeCab::Tagger.new.parse(command_params).gsub(/EOS\n\z/, "")}"
