@@ -1,4 +1,5 @@
 require "json"
+require "fileutils"
 
 class LingrbotTest < Test::Unit::TestCase
   include Rack::Test::Methods
@@ -92,6 +93,24 @@ class LingrbotTest < Test::Unit::TestCase
       images = JSON.parse(last_response.body)
       assert_kind_of(Array, images)
       assert_match(/\A\d+\.png\z/, images.first)
+    end
+  end
+
+  class DeleteTest < self
+    def setup
+      @condition = "201401051234"
+      @dest = "#{base_dir}/public/shogikoma/#{@condition}.png"
+      FileUtils.touch(@dest)
+    end
+
+    def teardown
+      FileUtils.rm_f(@dest)
+    end
+
+    def test_delete
+      delete "/shogikoma/#{@condition}"
+      assert_equal(200, last_response.status)
+      assert_false(File.exist?(@dest))
     end
   end
 
