@@ -80,7 +80,7 @@ helpers do
     painter = ShogiKoma::Painter.new
     painter.width = options[:width] || 200
     painter.height = options[:height] || options[:width] || 200
-    painter.font = options[:font] || "IPAMincho"
+    painter.set_font(options[:font] || "IPAMincho")
     painter.set_text_color(options[:text_color]) if options[:text_color]
     painter.set_body_color(options[:body_color]) if options[:body_color]
     painter.set_frame_color(options[:frame_color]) if options[:frame_color]
