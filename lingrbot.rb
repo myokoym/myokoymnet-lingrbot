@@ -61,6 +61,8 @@ helpers do
        font_info.split(/:/)[0].split(/,/)[0]
     }.reject {|font_name|
       /[ -]/ =~ font_name
+    }.select {|font_name|
+      /^(Kouzan|Aoyagi|IPA|Motoya)/i =~ font_name
     }.uniq.join(", ")
   end
 
