@@ -4,6 +4,7 @@ gem "sinatra"
 gem "sinatra-contrib"
 gem "mecab-mora"
 gem "shogi_koma", ">= 0.0.4"
+gem "tanka_renderer"
 
 group :development, :test do
   gem "test-unit"

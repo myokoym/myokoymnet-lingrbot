@@ -3,6 +3,7 @@ require "json"
 require "sinatra/json"
 require "mecab-mora"
 require "shogi_koma"
+require "tanka_renderer"
 
 post "/" do
   request_body = JSON.load(request.body)
@@ -24,6 +25,8 @@ post "/" do
     fc_list
   when /\Ashogikoma\z/
     shogikoma(command_params)
+  when /\Arender\z/
+    tanka_renderer(command_params)
   end
 end
 
@@ -87,6 +90,21 @@ helpers do
     painter.set_body_color(options[:body_color]) if options[:body_color]
     painter.set_frame_color(options[:frame_color]) if options[:frame_color]
     painter.write_to_png(data, output_path)
+    "http://myokoym.net/lingrbot/#{image_uri}"
+  end
+
+  def tanka_renderer(command_params)
+    image_uri = File.join("tanka_renderer", "#{Time.now.strftime("%Y%m%d%H%M%S")}.png")
+    output_path = File.join(File.dirname(__FILE__), "public", image_uri)
+    data, options = option_parse(command_params)
+    renderer = TankaRenderer::Renderer::Image.new
+    renderer.guess_font(options[:font] || "KouzanBrushFontOTF")
+    renderer.width = options[:height] if options[:height]
+    renderer.height = options[:width] if options[:width]
+    renderer.text_color = options[:text_color] if options[:text_color]
+    renderer.body_color = options[:body_color] if options[:body_color]
+    renderer.vertical = false
+    renderer.render(data, output_path)
     "http://myokoym.net/lingrbot/#{image_uri}"
   end
 

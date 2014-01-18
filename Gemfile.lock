@@ -37,6 +37,10 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (~> 1.3)
+    tanka_renderer (0.0.1)
+      cairo
+      fontdock (>= 0.0.2)
+      pango
     test-unit (2.5.5)
     test-unit-notify (1.0.1)
       test-unit (>= 2.4.9)
@@ -55,6 +59,7 @@ DEPENDENCIES
   shogi_koma (>= 0.0.4)
   sinatra
   sinatra-contrib
+  tanka_renderer
   test-unit
   test-unit-notify
   test-unit-rr
